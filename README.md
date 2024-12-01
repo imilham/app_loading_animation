@@ -55,3 +55,51 @@ This project provides a customizable loading animation widget to be used through
        );
      }
    }
+
+   4. **Use the Loader in Your Screens:**
+
+   To display the loader in your application, you can easily access the `AppStatesServiceProvider` using `Provider.of` or `Consumer` in any widget where you want to show the loading animation. For example, in a screen where you want to show a loader during an API call:
+
+   ```dart
+   import 'package:flutter/material.dart';
+   import 'package:provider/provider.dart';
+   import 'app_loading_animation.dart'; // Adjust the import to your actual file structure
+
+   class YourHomePage extends StatefulWidget {
+     @override
+     _YourHomePageState createState() => _YourHomePageState();
+   }
+
+   class _YourHomePageState extends State<YourHomePage> {
+     @override
+     Widget build(BuildContext context) {
+       // Access the AppStatesServiceProvider to control the loader
+       AppStatesServiceProvider appStates = Provider.of<AppStatesServiceProvider>(context);
+       
+       return Scaffold(
+         appBar: AppBar(title: Text('Loading Animation Example')),
+         body: Center(
+           child: Column(
+             mainAxisAlignment: MainAxisAlignment.center,
+             children: <Widget>[
+               if (appStates.isLoading)
+                 const CircularProgressIndicator(),  // Show loader when isLoading is true
+               ElevatedButton(
+                 onPressed: () async {
+                   // Show the loader when the button is pressed
+                   appStates.showLoader();
+                   
+                   // Simulate an API call
+                   await Future.delayed(const Duration(seconds: 3));
+                   
+                   // Hide the loader after the task is complete
+                   appStates.hideLoader();
+                 },
+                 child: const Text('Start API Call'),
+               ),
+             ],
+           ),
+         ),
+       );
+     }
+   }
