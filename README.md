@@ -103,3 +103,21 @@ This project provides a customizable loading animation widget to be used through
        );
      }
    }
+
+
+   5. **Customize the Loader (Optional):**
+
+   The loading animation is highly customizable. You can adjust its appearance, including size, color, and type of animation, based on your design preferences.
+
+   To customize the loader, you can modify the `AppStatesServiceProvider` or the `CircularProgressIndicator` widget used in the UI. For example:
+
+   - **Size**: You can adjust the size of the loader by passing a `value` to the `CircularProgressIndicator`'s `strokeWidth` property.
+   - **Color**: You can change the color of the loader by passing a `value` to the `CircularProgressIndicator`'s `valueColor` property.
+   
+   Example of a customized loader:
+
+   ```dart
+   CircularProgressIndicator(
+     strokeWidth: 5.0,  // Customize the thickness of the loader
+     valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),  // Customize the color
+   )
